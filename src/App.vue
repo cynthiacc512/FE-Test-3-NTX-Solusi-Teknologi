@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <h1>Product Management</h1>
+    <CategoryList :categories="categories" />
+    <button @click="addCategory()">Add Category</button>
+    <button @click="addProduct()">Add Product</button>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { useCategoriesStore } from '@/store/categories';
+import CategoryList from './components/CategoryList.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    CategoryList,
+  },
+  setup() {
+    const categoriesStore = useCategoriesStore();
+    categoriesStore.fetchCategories();
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+    const addCategory = () => {
+      // Open modal or navigate to add category page
+    };
+
+    const addProduct = () => {
+      // Open modal or navigate to add product page
+    };
+
+    return {
+      categories: categoriesStore.categories,
+      addCategory,
+      addProduct,
+    };
+  },
+};
+</script>

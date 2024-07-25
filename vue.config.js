@@ -1,4 +1,11 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true
-})
+const ESLintPlugin = require('eslint-webpack-plugin');
+
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      new ESLintPlugin({
+        extensions: ['js', 'vue'],
+      })
+    ]
+  }
+}
